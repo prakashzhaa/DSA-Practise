@@ -4,6 +4,8 @@
 3. If a player cannot make a move, he loses.
 Assume that both the players play optimally
 
+>>Code:
+
 class Solution {
     public static int swapBitGame(long N) {
         // code here
