@@ -1,0 +1,91 @@
+>>You are given a matrix of dimension n*n. All the cells are initially, zero. 
+You are given Q queries, which contains 4 integers a b c d where (a,b) is the TOP LEFT cell and (c,d) is the Bottom Right cell of a submatrix.
+Now, all the cells of this submatrix have to be incremented by one. After all the Q queries have been performed. Your task is to find the final resulting Matrix.
+
+Note : Zero-Based Indexing is used for cells of the matrix. 
+
+//{ Driver Code Starts
+// Initial Template for Java
+
+>> Code
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br =
+            new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out=new PrintWriter(System.out);
+        int T = Integer.parseInt(br.readLine().trim());
+        while (T-- > 0) {
+            String[] s = br.readLine().trim().split(" ");
+            int n = Integer.parseInt(s[0]);
+            int q = Integer.parseInt(s[1]);
+            int[][] Queries = new int[q][4];
+            for (int i = 0; i < q; i++) {
+                String[] s1 = br.readLine().trim().split(" ");
+                for (int j = 0; j < 4; j++)
+                    Queries[i][j] = Integer.parseInt(s1[j]);
+            }
+            Solution obj = new Solution();
+            int[][] ans = obj.solveQueries(n, Queries);
+            for (int i = 0; i < ans.length; i++) {
+                for (int j = 0; j < ans[i].length; j++) {
+                    out.print(ans[i][j] + " ");
+                }
+                out.println();
+            }
+        }
+        out.close();
+    }
+}
+
+// } Driver Code Ends
+
+
+// User function Template for Java
+
+class Solution {
+    public int[][] solveQueries(int n, int[][] Queries) {
+        // Code here
+        int [][] matrix=new int[n][n];
+        for(int[]q: Queries){
+            int a=q[0];
+            int b=q[1];
+            int c=q[2];
+            int d=q[3];
+            for(int row=a;row<=c;row++){
+                matrix[row][b]++;
+                if(d+1<n)matrix[row][d+1]--;
+            }
+        }
+        for (int col=1;col<n;col++){
+            for(int row=0;row<n;row++){
+                matrix[row][col]+=matrix[row][col-1];
+            }
+        }
+        return matrix; 
+    }
+}
+
+>>Input:
+6 6
+4 0 5 3
+0 0 3 4
+1 2 1 2
+1 1 2 3
+0 0 3 1
+1 0 2 4
+
+Output:
+2 2 1 1 1 0 
+3 4 4 3 2 0 
+3 4 3 3 2 0 
+2 2 1 1 1 0 
+1 1 1 1 0 0 
+1 1 1 1 0 0 
+
+Expected Time Complexity: O(n2)
+Expected Space Complexity: O(n2)
+ 
+ 
