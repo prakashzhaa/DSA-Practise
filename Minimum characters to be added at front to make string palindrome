@@ -1,0 +1,42 @@
+>> Discription:
+Given string str of length N. The task is to find the minimum characters to be added at the front to make string palindrome.
+Note: A palindrome is a word which reads the same backward as forward. Example: "madam".
+
+>> My Task: 
+You don't need to read input or print anything. Your task is to complete the function minChar() which takes a string S and returns an integer as output.
+
+>> Input:
+aacecaaa
+
+>> Code:
+
+class Solution {
+    public static int minChar(String str) {
+       //Write your code here
+       int end=str.length()-1;
+       while(end>=0){
+           if(isPal(str,end)){
+               return str.length()-1-end;
+           }
+           end--;
+       }
+       return -1;
+    }
+    static boolean isPal(String s, int j){
+        int i=0;
+        while(i<=j){
+            if(s.charAt(i)!=s.charAt(j))
+            return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
+
+>> Output:
+1
+
+>> Explanation: 
+Add 'a' at front of above string
+to make it palindrome : "aaacecaaa"
