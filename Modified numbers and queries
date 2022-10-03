@@ -1,0 +1,68 @@
+>> Discription:
+
+Find the sum of all the numbers between the range l and r. 
+Here each number is represented by the sum of its prime factors. 
+
+Note : For example, 6 is represented by 5 because 6 has two prime factors 2 and 3 and 2 + 3 = 5.
+
+>>My Task:  
+You dont need to read input or print anything.
+Complete the function sumOfAll() which takes l and r as input parameter and returns sum all the numbers ( as represented ) in the given range both L and R included.
+
+Expected Time Complexity: O(nloglogn)
+Expected Auxiliary Space: O(n)
+
+>>Code:
+
+>>Input: 
+l=1 and r=2
+
+/*
+if l=2 and r=6
+1-->1
+2-->2
+3-->3
+4-->2
+5-->5
+6-->2,3--5
+sum=2+3+2+5+5+5=17
+*/
+//User function Template for Java
+class Solution
+{
+    public int sumOfAll(int l, int r)
+    {
+        // code here
+        int ans=0;
+        boolean[] isPrime=new boolean[r+1];
+        Arrays.fill(isPrime,true);
+        
+        for(int i=2;i<=r;i++){
+            if(isPrime[i]){
+                for(int j=i*i;j<=r;j+=i){
+                    isPrime[j]=false;
+                }
+            }
+        }
+        while(l<=r){
+            if(l==1){
+                l++;
+                ans++;
+                continue;
+            }
+            int curr=0;
+            //find current (sumo fo prime factor)
+            for(int i=2;i<=l;i++){
+                if(isPrime[i] && l%i==0){
+                    curr+=i;
+                }
+            }
+            ans+=curr;
+            l++;
+        }
+        return ans;
+    }
+}
+
+>> Output:
+3
