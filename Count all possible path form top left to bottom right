@@ -1,0 +1,46 @@
+>> Qns: 
+Count all possible paths from top left to bottom right.
+
+>> Discription:
+
+The task is to count all the possible paths from top left to bottom right of a m X n matrix with the constraints 
+that from each cell you can either move only to right or down.
+
+>> Your Task:  
+You dont need to read input or print anything. Complete the function numberOfPaths() which takes m and n as input parameter and returns count all the possible paths.
+The answer may be very large, compute the answer modulo 109 + 7.
+
+>> Input:
+m=3 and n=3
+
+>> Code:
+
+class Solution
+{
+    int x,y;
+    long mod=1000000007; 
+    long dp[][];
+    long numberOfPaths(int m, int n)
+    {
+        // code here
+        x=m; y=n;
+        dp =new long[101][101];
+        return dfs(0,0);
+    }
+    long dfs(int i, int j){
+        if(i==x-1|| j==y-1){ return 1;}
+        if(dp[i][j]!=0){ return dp[i][j];}
+        long right=dfs(i,j+1); 
+        long down=dfs(i+1,j);
+        return dp[i][j]=(right+down)%mod;
+    }
+}
+
+>> Output:
+
+ 6 possible ways
+
+>> Explaination:
+
+Six possible ways are
+RRDD, DDRR, RDDR, DRRD, RDRD, DRDR. 
