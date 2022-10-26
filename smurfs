@@ -1,0 +1,62 @@
+>>Discription
+
+A geek once visited a magical island where he found a special creature. He named it as Smurf. He noticed a very strange thing there. 
+The smurfs resembled the primary colors of light. To make it more clear, the primary colors of light are Red(R), Green(G), and Blue(B). 
+He talked to one of the smurfs. The smurfs came to know that he is a good programmer.
+The smurfs suggested a deal that they will ask him one question and if he is able to answer that question, they will allow the geek to take anything from the island.
+The question is as follows:
+The smurfs possess a very magical property. When two smurfs of different colors meet with other, they gets converted into a smurf of the third color. 
+How many minimum number of smurfs will be remaining after this transformation? The question looked simple to geek. However, the smurfs put another constraint to make the geek think more.
+The two smurfs must be adjacent to each other  to make the transformation take place. There are n smurfs the colors of which are given in an array a[].
+
+>> Input:
+
+n=5
+string = 'G', 'R', 'B', 'R' ,'G'
+
+>> Source Code:
+
+class Solution{
+    static int minFind(int n, String a[]){
+        // code here
+        int r=0;
+        int b=0;
+        int g=0;
+        
+        for(int i=0;i<n;i++){
+            if(a[i].equals("R")){
+                r++;
+            }else if(a[i].equals("B"))
+            {
+                b++;
+            }else{
+                g++;
+            }
+        }
+        if(r==n || g==n || b==n){
+            return n;
+        }
+        if((r%2==0 && b%2==0 && g%2==0) || (r%2!=0 && b%2!=0 && g%2!=0)){
+            return 2;
+        }
+        return 1;
+    }
+}
+
+Output: 
+1
+
+>> Explaination:
+
+'G' 'R' 'B' 'R' 'G'
+
+=> ('G' 'R'='B') 'B' 'R' 'G'    // G R makes B
+=> 'B' 'B' 'R' 'G'
+=> 'B' ('B' 'R'='G') 'G'    // B R makes G
+=> 'B' 'G' 'G'
+=> ('B' 'G'='R') 'G'    // B G makes R
+=> 'R' 'G'
+=>  'B'         // R G makes B
+=>   1          // at last b remains so ans is 1.
+
+
